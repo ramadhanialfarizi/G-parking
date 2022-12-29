@@ -22,6 +22,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.delete,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
