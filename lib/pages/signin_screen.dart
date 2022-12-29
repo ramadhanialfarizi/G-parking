@@ -117,13 +117,13 @@ class _SigninScreenState extends State<SigninScreen> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 0, 204, 240),
                             ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                //side: BorderSide(color: Colors.red),
-                              ),
-                            ),
+                            // shape: MaterialStateProperty.all<
+                            //     RoundedRectangleBorder>(
+                            //   RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(18.0),
+                            //     //side: BorderSide(color: Colors.red),
+                            //   ),
+                            // ),
                           ),
                           onPressed: () async {
                             final loginValid = formKey.currentState!.validate();
@@ -168,13 +168,13 @@ class _SigninScreenState extends State<SigninScreen> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 0, 204, 240),
                             ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                //side: BorderSide(color: Colors.red),
-                              ),
-                            ),
+                            // shape: MaterialStateProperty.all<
+                            //     RoundedRectangleBorder>(
+                            //   RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(18.0),
+                            //     //side: BorderSide(color: Colors.red),
+                            //   ),
+                            // ),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pushReplacementNamed('/home');

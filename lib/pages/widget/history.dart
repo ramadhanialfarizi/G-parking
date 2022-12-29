@@ -24,12 +24,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
         centerTitle: false,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: TextButton(
               onPressed: () {},
-              icon: Icon(
-                Icons.delete,
-                color: Colors.black,
+              child: Text(
+                'Clear history?',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 204, 240),
+                ),
               ),
             ),
           ),

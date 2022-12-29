@@ -197,13 +197,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 0, 204, 240),
                             ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                //side: BorderSide(color: Colors.red),
-                              ),
-                            ),
+                            // shape: MaterialStateProperty.all<
+                            //     RoundedRectangleBorder>(
+                            //   RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(18.0),
+                            //     //side: BorderSide(color: Colors.red),
+                            //   ),
+                            // ),
                           ),
                           onPressed: () async {
                             final loginValid = formKey.currentState!.validate();
