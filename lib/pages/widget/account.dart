@@ -23,6 +23,40 @@ class _AccountScreenState extends State<AccountScreen> {
         backgroundColor: Colors.transparent,
         centerTitle: false,
       ),
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Column(
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 200, 200, 200),
+                  ),
+                  child: FittedBox(
+                    child: Icon(
+                      Icons.account_circle,
+                      //size: 100,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  'Profile picture ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
