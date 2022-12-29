@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   splashScreenStart() async {
-    var duration = const Duration(seconds: 3);
+    var duration = const Duration(seconds: 2);
     return Timer(duration, () {
       // if (userLogin.currentUser == null) {
       //   Navigator.of(context).pushReplacementNamed('/login');
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //   Navigator.of(context).pushReplacementNamed('/home');
       // }
 
-      Navigator.of(context).pushReplacementNamed('/login');
+      Navigator.of(context).pushReplacementNamed('/signin');
     });
   }
 
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Center(
           child: Image.asset(
-            'assets/images/logo.png',
+            'assets/images/logo_revised.png',
             scale: 1,
           ),
         ),

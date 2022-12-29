@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:g_parking/pages/signin_screen.dart';
+import 'package:g_parking/pages/widget/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      //title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,6 +28,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: '/',
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case '/':
+            return CupertinoPageRoute(
+                builder: (_) => const SplashScreen(), settings: settings);
+          case '/signin':
+            return CupertinoPageRoute(
+                builder: (_) => const SigninScreen(), settings: settings);
+        }
+        return null;
+      },
     );
   }
 }
