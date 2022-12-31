@@ -31,153 +31,156 @@ class _AccountScreenState extends State<AccountScreen> {
         ],
       ),
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50.0, right: 30.0, left: 30.0),
-            child: Column(
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color.fromARGB(255, 224, 224, 224),
-                  ),
-                  child: FittedBox(
-                    child: Icon(
-                      Icons.account_circle,
-                      //size: 100,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 50.0, right: 30.0, left: 30.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(255, 224, 224, 224),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  'Profile picture ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Fullname ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    child: FittedBox(
+                      child: Icon(
+                        Icons.account_circle,
+                        //size: 100,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Profile picture ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 224, 224, 224),
-                        borderRadius: BorderRadius.circular(10),
+                  ),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Full name ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      child: Center(
-                        child: Text(
-                          'Muhammad Ramadhani Alfarizi',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 224, 224, 224),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Muhammad Ramadhani Alfarizi',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      'Email ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 224, 224, 224),
-                        borderRadius: BorderRadius.circular(10),
+                      const Text(
+                        'Email ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      child: Center(
-                        child: Text(
-                          'ramadhani.alfarizi@gmail.com',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 224, 224, 224),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'ramadhani.alfarizi@gmail.com',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      'Phone number ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 224, 224, 224),
-                        borderRadius: BorderRadius.circular(10),
+                      const Text(
+                        'Phone number ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      child: Center(
-                        child: Text(
-                          '0821231231232132',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 224, 224, 224),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '0821231231232132',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 90,
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: ElevatedButton(
-                        child: const Text(
-                          'Sign out',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
-                        ),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(10),
-                            )),
-                            context: context,
-                            builder: (context) => SignOutAllert(),
-                          );
-                        },
+                      const SizedBox(
+                        height: 90,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      SizedBox(
+                        width: 150,
+                        child: ElevatedButton(
+                          child: const Text(
+                            'Sign out',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.red),
+                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(10),
+                              )),
+                              context: context,
+                              builder: (context) => SignOutAllert(),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
