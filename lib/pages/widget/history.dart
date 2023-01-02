@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:g_parking/pages/widget/delete_history_allert.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -26,7 +27,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(10),
+                  )),
+                  context: context,
+                  builder: (context) => const DeleteHistoryAllert(),
+                );
+              },
               child: Text(
                 'Clear history?',
                 style: TextStyle(

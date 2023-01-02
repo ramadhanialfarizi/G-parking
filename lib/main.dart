@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g_parking/handler/signin_provider.dart';
 import 'package:g_parking/handler/signup_provider.dart';
+import 'package:g_parking/pages/edit_account.dart';
 import 'package:g_parking/pages/home_screen.dart';
 import 'package:g_parking/pages/signin_screen.dart';
 import 'package:g_parking/pages/signup_screen.dart';
@@ -60,6 +61,9 @@ class MyApp extends StatelessWidget {
           case '/home':
             return CupertinoPageRoute(
                 builder: (_) => const HomeScreen(), settings: settings);
+          case '/edit-account':
+            return CupertinoPageRoute(
+                builder: (_) => const EditAccountScreen(), settings: settings);
         }
         return null;
       },

@@ -25,7 +25,9 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed('/edit-account');
+            },
             icon: Icon(Icons.edit),
           ),
         ],
