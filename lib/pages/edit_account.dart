@@ -8,6 +8,21 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+  final formKey = GlobalKey<FormState>();
+  var firstName = TextEditingController();
+  var lastName = TextEditingController();
+  var email = TextEditingController();
+  var phoneNumber = TextEditingController();
+
+  @override
+  void dispose() {
+    firstName.dispose();
+    lastName.dispose();
+    email.dispose();
+    phoneNumber.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +57,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   TextButton(
                     onPressed: () {},
@@ -53,10 +68,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Form(
-                    //key: ,
+                    key: formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -70,11 +85,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: firstName,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Color.fromARGB(255, 224, 224, 224),
                             border: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '* please input your first name';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 30,
@@ -90,11 +112,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         ),
                         TextFormField(
                           //style: TextStyle(fontSize: 10),
+                          controller: lastName,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Color.fromARGB(255, 224, 224, 224),
                             border: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '* please input your last name';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 30,
@@ -117,12 +146,19 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: email,
                           readOnly: true,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Color.fromARGB(255, 224, 224, 224),
                             border: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '* please input your email';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 30,
@@ -137,11 +173,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: phoneNumber,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Color.fromARGB(255, 224, 224, 224),
                             border: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '* please input your phone number';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 30,
@@ -175,14 +218,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           onPressed: () {
-            Navigator.pop(context);
+            final loginValid = formKey.currentState!.validate();
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Edit Saved'),
-                duration: Duration(milliseconds: 800),
-              ),
-            );
+            if (loginValid) {
+              Navigator.pop(context);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Edit Saved'),
+                  duration: Duration(milliseconds: 800),
+                ),
+              );
+            }
           },
         ),
       ),

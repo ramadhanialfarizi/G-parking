@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+//import 'package:g_parking/handler/auth_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../handler/signin_provider.dart';
@@ -28,10 +30,10 @@ class _SigninScreenState extends State<SigninScreen> {
     final provider = Provider.of<SignInProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/logo_revised.png',
@@ -119,13 +121,6 @@ class _SigninScreenState extends State<SigninScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                 Color.fromARGB(255, 0, 204, 240),
                               ),
-                              // shape: MaterialStateProperty.all<
-                              //     RoundedRectangleBorder>(
-                              //   RoundedRectangleBorder(
-                              //     borderRadius: BorderRadius.circular(18.0),
-                              //     //side: BorderSide(color: Colors.red),
-                              //   ),
-                              // ),
                             ),
                             onPressed: () async {
                               final loginValid =
@@ -135,8 +130,44 @@ class _SigninScreenState extends State<SigninScreen> {
                               String userPassword = password.text;
 
                               if (loginValid) {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
+                                if (FirebaseAuth.instance.currentUser == null) {
+                                  try {
+                                    await FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                            email: userEmail,
+                                            password: userPassword);
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Signin success'),
+                                        duration: Duration(milliseconds: 800),
+                                      ),
+                                    );
+
+                                    Navigator.of(context)
+                                        .pushReplacementNamed('/home');
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'user-not-found') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'No user found for that email.'),
+                                          duration: Duration(milliseconds: 800),
+                                        ),
+                                      );
+                                    } else if (e.code == 'wrong-password') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Wrong password provided for that user.'),
+                                          duration: Duration(milliseconds: 800),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                }
                               }
                             },
                           ),

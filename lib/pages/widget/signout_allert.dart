@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignOutAllert extends StatelessWidget {
   const SignOutAllert({super.key});
@@ -28,7 +30,9 @@ class SignOutAllert extends StatelessWidget {
                     'Sign out',
                     style: TextStyle(color: Colors.red),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    GoogleSignIn().signOut();
+                    await FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         '/signin', ModalRoute.withName('/'));
                   },

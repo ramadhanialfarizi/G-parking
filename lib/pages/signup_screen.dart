@@ -1,6 +1,9 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:g_parking/handler/auth_handler.dart';
 import 'package:g_parking/handler/signup_provider.dart';
+import 'package:g_parking/handler/user_account_handler.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -24,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     firstName.dispose();
     lastName.dispose();
     email.dispose();
+    phoneNumber.dispose();
     password.dispose();
     confirmPassword.dispose();
     super.dispose();
@@ -34,10 +38,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final provider = Provider.of<SignUpProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/logo_revised.png',
@@ -189,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.account_circle,
                                 color: Colors.white),
-                            label: Text(
+                            label: const Text(
                               'Sign Up',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -200,27 +205,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 0, 204, 240),
                               ),
-                              // shape: MaterialStateProperty.all<
-                              //     RoundedRectangleBorder>(
-                              //   RoundedRectangleBorder(
-                              //     borderRadius: BorderRadius.circular(18.0),
-                              //     //side: BorderSide(color: Colors.red),
-                              //   ),
-                              // ),
                             ),
                             onPressed: () async {
                               final loginValid =
                                   formKey.currentState!.validate();
 
                               if (loginValid) {
+                                await Authentication()
+                                    .signUpManualy(email.text, password.text);
+                                await UserAccountHandler().addUser(
+                                  firstName.text,
+                                  lastName.text,
+                                  email.text,
+                                  phoneNumber.text,
+                                );
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Signup Berhasil!!'),
+                                    duration: Duration(milliseconds: 800),
+                                  ),
+                                );
+
+                                await FirebaseAuth.instance.signOut();
                                 Navigator.pop(context);
                               }
-
-                              // String _firstName = firstName.text;
-                              // String _lastName = lastName.text;
-                              // String _email = email.text;
-                              // String _phoneNumber = phoneNumber.text;
-                              // String _password = password.text;
                             },
                           ),
                         ),
