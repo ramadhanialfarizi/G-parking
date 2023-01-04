@@ -1,7 +1,8 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:g_parking/handler/auth_handler.dart';
+import 'package:g_parking/handler/auth_handler.dart';
+import 'package:g_parking/pages/widget/sign_in_cancel.dart';
+import 'package:g_parking/pages/widget/sign_in_fail.dart';
 import 'package:provider/provider.dart';
 
 import '../handler/signin_provider.dart';
@@ -23,6 +24,51 @@ class _SigninScreenState extends State<SigninScreen> {
     email.dispose();
     password.dispose();
     super.dispose();
+  }
+
+  Future<void> manualSignIn(email, password) async {
+    final loginValid = formKey.currentState!.validate();
+
+    if (loginValid) {
+      final signIn = await Authentication().signInManualy(email, password);
+
+      if (signIn == null) {
+        showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+            top: Radius.circular(10),
+          )),
+          context: context,
+          builder: (context) => const SignInFail(),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Signin success'),
+            duration: Duration(milliseconds: 800),
+          ),
+        );
+
+        Navigator.of(context).pushReplacementNamed('/home');
+      }
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    final googleSignin = await Authentication().googleSignIn();
+
+    if (googleSignin == null) {
+      await showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+          top: Radius.circular(10),
+        )),
+        context: context,
+        builder: (context) => const SignInCanceled(),
+      );
+    } else {
+      await Navigator.of(context).pushReplacementNamed('/home');
+    }
   }
 
   @override
@@ -123,52 +169,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             ),
                             onPressed: () async {
-                              final loginValid =
-                                  formKey.currentState!.validate();
-
-                              String userEmail = email.text;
-                              String userPassword = password.text;
-
-                              if (loginValid) {
-                                if (FirebaseAuth.instance.currentUser == null) {
-                                  try {
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: userEmail,
-                                            password: userPassword);
-
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Signin success'),
-                                        duration: Duration(milliseconds: 800),
-                                      ),
-                                    );
-
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/home');
-                                  } on FirebaseAuthException catch (e) {
-                                    if (e.code == 'user-not-found') {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                              'No user found for that email.'),
-                                          duration: Duration(milliseconds: 800),
-                                        ),
-                                      );
-                                    } else if (e.code == 'wrong-password') {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                              'Wrong password provided for that user.'),
-                                          duration: Duration(milliseconds: 800),
-                                        ),
-                                      );
-                                    }
-                                  }
-                                }
-                              }
+                              await manualSignIn(email.text, password.text);
                             },
                           ),
                         ),
@@ -202,18 +203,8 @@ class _SigninScreenState extends State<SigninScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                 Color.fromARGB(255, 0, 204, 240),
                               ),
-                              // shape: MaterialStateProperty.all<
-                              //     RoundedRectangleBorder>(
-                              //   RoundedRectangleBorder(
-                              //     borderRadius: BorderRadius.circular(18.0),
-                              //     //side: BorderSide(color: Colors.red),
-                              //   ),
-                              // ),
                             ),
-                            onPressed: () async {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/home');
-                            },
+                            onPressed: googleSignIn,
                           ),
                         ),
                       ],

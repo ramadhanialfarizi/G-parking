@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
   FirebaseAuth authentication = FirebaseAuth.instance;
@@ -14,7 +15,6 @@ class Authentication {
     }
   }
 
-  // masih belum bisa dipakai
   Future signInManualy(String email, String password) async {
     if (authentication.currentUser == null) {
       try {
@@ -23,10 +23,28 @@ class Authentication {
 
         return signInManual;
       } on FirebaseAuthException catch (e) {
-        rethrow;
+        return null;
       }
     }
   }
 
-  Future googleSignIn() async {}
+  Future googleSignIn() async {
+    if (authentication.currentUser == null) {
+      try {
+        GoogleSignInAccount? account = await GoogleSignIn().signIn();
+        if (account != null) {
+          GoogleSignInAuthentication auth = await account.authentication;
+          OAuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: auth.accessToken,
+            idToken: auth.idToken,
+          );
+          await FirebaseAuth.instance.signInWithCredential(credential);
+        } else {
+          return null;
+        }
+      } on FirebaseAuthException catch (e) {
+        return null;
+      }
+    }
+  }
 }
